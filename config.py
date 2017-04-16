@@ -1,2 +1,3 @@
 SQLALCHEMY_DATABASE_URI = "postgresql:///iscf"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+SECRET_KEY = "this is secret"
