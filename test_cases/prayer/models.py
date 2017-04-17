@@ -101,7 +101,7 @@ class TestPrayerDatabaseController(unittest.TestCase):
 
         self.controller.pray_prayer(pray_5.id)
 
-        all_unprayed_prayers_after = self.controller.get_unprayed_prayer()
+        all_unprayed_prayers_after = self.controller.get_unprayed_prayers()
 
         assert pray_1 in all_unprayed_prayers_after
         assert pray_2 in all_unprayed_prayers_after
@@ -142,8 +142,8 @@ class TestPrayerDatabaseController(unittest.TestCase):
         start_date = datetime.strptime("1/Nov/00 19:00", "%d/%b/%y %H:%M").isoformat()
         end_date = datetime.strptime("17/Nov/00 19:00", "%d/%b/%y %H:%M").isoformat()
 
-        all_unprayed_prayers = self.controller.get_unprayed_prayer(start_date=start_date,
-                                                                   end_date=end_date)
+        all_unprayed_prayers = self.controller.get_unprayed_prayers(start_date=start_date,
+                                                                    end_date=end_date)
 
         assert pray_1 in all_unprayed_prayers
         assert pray_2 in all_unprayed_prayers
@@ -177,7 +177,7 @@ class TestPrayerDatabaseController(unittest.TestCase):
 
         self.controller.pray_prayer(pray_5.id)
 
-        all_prayed_prayers = self.controller.get_prayed_prayer()
+        all_prayed_prayers = self.controller.get_prayed_prayers()
 
         assert pray_1 not in all_prayed_prayers
         assert pray_2 not in all_prayed_prayers
@@ -221,8 +221,8 @@ class TestPrayerDatabaseController(unittest.TestCase):
         start_date = datetime.strptime("20/Nov/00 19:00", "%d/%b/%y %H:%M").isoformat()
         end_date = datetime.strptime("27/Nov/00 19:00", "%d/%b/%y %H:%M").isoformat()
 
-        all_prayed_prayers = self.controller.get_prayed_prayer(start_date=start_date,
-                                                               end_date=end_date)
+        all_prayed_prayers = self.controller.get_prayed_prayers(start_date=start_date,
+                                                                end_date=end_date)
 
         assert pray_1 not in all_prayed_prayers
         assert pray_2 not in all_prayed_prayers

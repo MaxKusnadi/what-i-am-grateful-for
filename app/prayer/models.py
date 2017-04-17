@@ -55,7 +55,7 @@ class PrayerDatabaseController(object):
         db.session.commit()
         return prayer
 
-    def get_prayed_prayer(self, start_date=None, end_date=None):
+    def get_prayed_prayers(self, start_date=None, end_date=None):
         if start_date and end_date:
             logging.info("Getting all prayed prayers from {start_date} to {end_date}...".format(
                 start_date=start_date, end_date=end_date
@@ -70,7 +70,7 @@ class PrayerDatabaseController(object):
         sorted_result_by_date = sorted(results, key=lambda prayer: prayer.datetime, reverse=True)
         return sorted_result_by_date
 
-    def get_unprayed_prayer(self, start_date=None, end_date=None):
+    def get_unprayed_prayers(self, start_date=None, end_date=None):
         if start_date and end_date:
             logging.info("Getting all unprayed prayers from {start_date} to {end_date}...".format(
                 start_date=start_date, end_date=end_date

@@ -1,25 +1,20 @@
 {% extends 'layouts/main.html' %}
+
 {% block navbar %}
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   <ul class="nav navbar-nav">
-    <li class="active"><a href="/">Gratitudes<span class="sr-only">(current)</span></a></li>
-    <li><a href="/prayer">Prayers</a></li>
+    <li><a href="/">Gratitudes<span class="sr-only">(current)</span></a></li>
+    <li class="active"><a href="/prayer">Prayers</a></li>
   </ul>
 </div><!-- /.navbar-collapse -->
 {% endblock %}
 
 {% block content %}
-  YOUR GRATITUDE:
+  YOUR PRAYER:
   <form id="broadcast" method="POST" action='#'>
     <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
     <input type="submit" value="Broadcast">
   </form>
 
-  {% if results|length > 0 %}
-    <ul id="log">
-      {% for result in results %}
-        <li>Message: {{ result['message'] }} - {{ result['datetime'] }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+  <div id="log"></div>
 {% endblock %}

@@ -19,7 +19,7 @@ class Gratitude(db.Model):
         return "<{id}> Message: {message} - Date: {date}".format(id=self.id, message=self.message, date=self.datetime)
 
 
-class GratitudeDatabaseController(object):
+class GratitudeDatabaseController:
 
     def add_gratitude(self, message, datetime):
         logging.info("Adding a gratitude to database...")

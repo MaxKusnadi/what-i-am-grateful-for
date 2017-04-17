@@ -19,7 +19,8 @@ from app.prayer.models import *
 
 # Views
 from app.gratitude.views import *
+from app.prayer.views import *
 
 # Socket
-from app.gratitude.socketio import *
+from app.gratitude.controller import *
 
