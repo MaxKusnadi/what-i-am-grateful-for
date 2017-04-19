@@ -19,27 +19,39 @@ class TestPrayerController(unittest.TestCase):
         os.unlink(app.app.config['DATABASE'])
 
     def test_add_prayer_success(self):
-        message = "HELLO"
-        prayer = self.controller.add_prayer(message)
+        message = {
+            "data": "HELLO"
+        }
+        prayer = self.controller.on_add_prayer(message)
 
-        assert prayer.message == message
+        assert prayer.message == message['data']
 
     def test_add_prayer_failure(self):
-        message = ""
-        self.assertRaises(ValueError, self.controller.add_prayer, message)
+        message = {
+            "data": ""
+        }
+        self.assertRaises(ValueError, self.controller.on_add_prayer, message)
 
     def test_pray_prayer(self):
-        message = "HELLO"
+        message = {
+            "data": "HELLO"
+        }
 
-        prayer_before = self.controller.add_prayer(message)
+        prayer_before = self.controller.on_add_prayer(message)
         assert prayer_before.isPrayed is False
 
         prayer_after = self.controller.pray_prayer(prayer_before.id)
         assert prayer_after.isPrayed is True
 
     def test_get_all_unprayed_prayers(self):
-        prayer_1 = self.controller.add_prayer("HELLO 1")
-        prayer_2 = self.controller.add_prayer("HELLO 2")
+        message_1 = {
+            "data": "HELLO 1"
+        }
+        message_2 = {
+            "data": "HELLO 2"
+        }
+        prayer_1 = self.controller.on_add_prayer(message_1)
+        prayer_2 = self.controller.on_add_prayer(message_2)
 
         all_unprayed_prayers = self.controller.get_unprayed_prayers()
         all_prayed_prayers = self.controller.get_prayed_prayers()
@@ -50,8 +62,14 @@ class TestPrayerController(unittest.TestCase):
         assert prayer_2 not in all_prayed_prayers
 
     def test_get_all_prayed_prayers(self):
-        prayer_1 = self.controller.add_prayer("HELLO 1")
-        prayer_2 = self.controller.add_prayer("HELLO 2")
+        message_1 = {
+            "data": "HELLO 1"
+        }
+        message_2 = {
+            "data": "HELLO 2"
+        }
+        prayer_1 = self.controller.on_add_prayer(message_1)
+        prayer_2 = self.controller.on_add_prayer(message_2)
 
         prayer_1 = self.controller.pray_prayer(prayer_1.id)
         prayer_2 = self.controller.pray_prayer(prayer_2.id)
@@ -65,8 +83,14 @@ class TestPrayerController(unittest.TestCase):
         assert prayer_2 in all_prayed_prayers
 
     def test_delete_unprayed_prayer(self):
-        prayer_1 = self.controller.add_prayer("HELLO 1")
-        prayer_2 = self.controller.add_prayer("HELLO 2")
+        message_1 = {
+            "data": "HELLO 1"
+        }
+        message_2 = {
+            "data": "HELLO 2"
+        }
+        prayer_1 = self.controller.on_add_prayer(message_1)
+        prayer_2 = self.controller.on_add_prayer(message_2)
 
         all_unprayed_prayers = self.controller.get_unprayed_prayers()
 
@@ -81,8 +105,14 @@ class TestPrayerController(unittest.TestCase):
         assert prayer_2 in all_unprayed_prayers_after
 
     def test_delete_prayed_prayer(self):
-        prayer_1 = self.controller.add_prayer("HELLO 1")
-        prayer_2 = self.controller.add_prayer("HELLO 2")
+        message_1 = {
+            "data": "HELLO 1"
+        }
+        message_2 = {
+            "data": "HELLO 2"
+        }
+        prayer_1 = self.controller.on_add_prayer(message_1)
+        prayer_2 = self.controller.on_add_prayer(message_2)
 
         prayer_1 = self.controller.pray_prayer(prayer_1.id)
         prayer_2 = self.controller.pray_prayer(prayer_2.id)

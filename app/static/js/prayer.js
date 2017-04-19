@@ -1,5 +1,5 @@
 /**
- * Created by max on 18/4/17.
+ * Created by max on 19/4/17.
  */
 
 $(document).ready(function() {
@@ -9,7 +9,7 @@ $(document).ready(function() {
     // Socket.IO will multiplex all those connections on a single
     // physical channel. If you don't care about multiple channels, you
     // can set the namespace to an empty string.
-    namespace = '/gratitude';
+    namespace = '/prayer';
     // Connect to the Socket.IO server.
     // The connection URL has the following format:
     //     http[s]://<domain>:<port>[/<namespace>]
@@ -28,7 +28,7 @@ $(document).ready(function() {
         $('#log').prepend($('<li/>').text('Message: ' + msg.message + ' - ' + msg.datetime).html());
     });
     $('form#broadcast').submit(function(event) {
-        socket.emit('add_gratitude', {data: $('#broadcast_data').val()});
+        socket.emit('add_prayer', {data: $('#broadcast_data').val()});
         return false;
     });
 });

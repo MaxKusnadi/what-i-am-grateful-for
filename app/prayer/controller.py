@@ -2,25 +2,36 @@ import logging
 import pytz
 
 from datetime import datetime, timedelta
-from flask_socketio import Namespace, emit, join_room, leave_room, \
-    close_room, rooms, disconnect
+from flask_socketio import Namespace, emit
 
 from app import socketio
 from app.prayer.models import PrayerDatabaseController
 
 
-class PrayerController:
+class PrayerController(Namespace):
 
-    def __init__(self):
+    def __init__(self, *args):
+        super().__init__(*args)
         self.controller = PrayerDatabaseController()
 
-    def add_prayer(self, message):
+    def on_add_prayer(self, message):
+        message = message['data']
         if not message:
             logging.error("Empty prayer message")
             raise ValueError("Empty message")
         logging.info("Adding a prayer from controller...")
         time = self._get_current_time().isoformat()
         prayer = self.controller.add_prayer(message, time)
+
+        try:
+            emit('my_response', {
+                 'message': prayer.message,
+                 'datetime': time,
+                 'isPrayed': prayer.isPrayed
+            }, broadcast=True)
+        except RuntimeError:
+            pass  # for testing purposes
+
         return prayer
 
     def delete_prayer(self, id):
@@ -63,3 +74,9 @@ class PrayerController:
         timezone = pytz.timezone('Asia/Singapore')
         date_now = datetime.now(timezone)
         return date_now
+
+    def on_my_event(self, message): # pragma: no cover
+        if message['data']:
+            logging.info("A client is connected to the prayer page")
+
+socketio.on_namespace(PrayerController('/prayer'))

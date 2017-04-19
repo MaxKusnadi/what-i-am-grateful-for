@@ -23,4 +23,5 @@ from app.prayer.views import *
 
 # Socket
 from app.gratitude.controller import *
+from app.prayer.controller import *
 

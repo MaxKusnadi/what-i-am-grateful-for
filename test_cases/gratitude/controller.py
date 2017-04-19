@@ -19,18 +19,27 @@ class TestGratitudeController(unittest.TestCase):
         os.unlink(app.app.config['DATABASE'])
 
     def test_add_gratitude_success(self):
-        message = "HELLO"
-        gratitude = self.controller.add_gratitude(message)
-
-        assert gratitude.message == message
+        message = {
+            "data": "HELLO"
+        }
+        gratitude = self.controller.on_add_gratitude(message)
+        assert gratitude.message == message['data']
 
     def test_add_gratitude_failure(self):
-        message = ""
-        self.assertRaises(ValueError, self.controller.add_gratitude, message)
+        message = {
+            "data": ""
+        }
+        self.assertRaises(ValueError, self.controller.on_add_gratitude, message)
 
     def test_get_all_gratitudes(self):
-        gratitude_1 = self.controller.add_gratitude("HELLO 1")
-        gratitude_2 = self.controller.add_gratitude("HELLO 2")
+        message_1 = {
+            "data": "HELLO 1"
+        }
+        message_2 = {
+            "data": "HELLO 2"
+        }
+        gratitude_1 = self.controller.on_add_gratitude(message_1)
+        gratitude_2 = self.controller.on_add_gratitude(message_2)
 
         all_gratitudes = self.controller.get_all_gratitudes()
 
@@ -38,8 +47,14 @@ class TestGratitudeController(unittest.TestCase):
         assert gratitude_2 in all_gratitudes
 
     def test_delete_gratitude(self):
-        gratitude_1 = self.controller.add_gratitude("HELLO 1")
-        gratitude_2 = self.controller.add_gratitude("HELLO 2")
+        message_1 = {
+            "data": "HELLO 1"
+        }
+        message_2 = {
+            "data": "HELLO 2"
+        }
+        gratitude_1 = self.controller.on_add_gratitude(message_1)
+        gratitude_2 = self.controller.on_add_gratitude(message_2)
 
         all_gratitudes = self.controller.get_all_gratitudes()
 

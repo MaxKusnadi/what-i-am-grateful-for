@@ -2,8 +2,7 @@ import logging
 import pytz
 
 from datetime import datetime, timedelta
-from flask_socketio import Namespace, emit, join_room, leave_room, \
-    close_room, rooms, disconnect
+from flask_socketio import Namespace, emit
 
 from app import socketio
 from app.gratitude.models import GratitudeDatabaseController
@@ -23,10 +22,15 @@ class GratitudeController(Namespace):
         logging.info("Adding a gratitude from controller...")
         time = self._get_current_time().isoformat()
         gratitude = self.controller.add_gratitude(message, time)
-        emit('my_response', {
-            'message': gratitude.message,
-            'datetime': time
-        }, broadcast=True)
+
+        try:
+            emit('my_response', {
+                 'message': gratitude.message,
+                 'datetime': time
+            }, broadcast=True)
+        except RuntimeError:
+            pass  # for testing purposes
+
         return gratitude
 
     def delete_gratitude(self, id):
@@ -54,6 +58,6 @@ class GratitudeController(Namespace):
 
     def on_my_event(self, message): # pragma: no cover
         if message['data']:
-            logging.info("Connected")
+            logging.info("A client is connected to the gratitude page")
 
 socketio.on_namespace(GratitudeController('/gratitude'))
