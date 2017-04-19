@@ -16,9 +16,9 @@ class PrayerController(Namespace):
 
     def on_add_prayer(self, message):
         message = message['data']
-        if not message:
+        if not message.strip():
             logging.error("Empty prayer message")
-            raise ValueError("Empty message")
+            return None
         logging.info("Adding a prayer from controller...")
         time = self._get_current_time().isoformat()
         prayer = self.controller.add_prayer(message, time)

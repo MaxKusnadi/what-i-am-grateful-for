@@ -11,4 +11,4 @@ class TestPrayerView(unittest.TestCase):
     def test_get(self):
         result = self.app.get('/prayer')
 
-        assert b'YOUR PRAYER' in result.data
+        assert b'Here is my prayer intention...' in result.data

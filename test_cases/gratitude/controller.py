@@ -23,13 +23,16 @@ class TestGratitudeController(unittest.TestCase):
             "data": "HELLO"
         }
         gratitude = self.controller.on_add_gratitude(message)
+
         assert gratitude.message == message['data']
 
     def test_add_gratitude_failure(self):
         message = {
-            "data": ""
+            "data": " "
         }
-        self.assertRaises(ValueError, self.controller.on_add_gratitude, message)
+        gratitude = self.controller.on_add_gratitude(message)
+
+        assert gratitude is None
 
     def test_get_all_gratitudes(self):
         message_1 = {

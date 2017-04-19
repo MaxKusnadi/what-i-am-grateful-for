@@ -28,9 +28,11 @@ class TestPrayerController(unittest.TestCase):
 
     def test_add_prayer_failure(self):
         message = {
-            "data": ""
+            "data": " "
         }
-        self.assertRaises(ValueError, self.controller.on_add_prayer, message)
+        prayer = self.controller.on_add_prayer(message)
+
+        assert prayer is None
 
     def test_pray_prayer(self):
         message = {

@@ -16,9 +16,9 @@ class GratitudeController(Namespace):
 
     def on_add_gratitude(self, message):
         message = message['data']
-        if not message:
+        if not message.strip():
             logging.error("Empty gratitude message")
-            raise ValueError("Empty message")
+            return None
         logging.info("Adding a gratitude from controller...")
         time = self._get_current_time().isoformat()
         gratitude = self.controller.add_gratitude(message, time)

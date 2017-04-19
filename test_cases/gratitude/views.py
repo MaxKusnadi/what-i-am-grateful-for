@@ -11,5 +11,5 @@ class TestGratitudeView(unittest.TestCase):
     def test_get(self):
         result = self.app.get('/')
 
-        assert b'YOUR GRATITUDE' in result.data
+        assert b'What I am grateful today...' in result.data
 
