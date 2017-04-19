@@ -12,8 +12,8 @@ $(document).ready(function() {
     socket.on('my_response', function(msg) {
         $('#log').prepend($('<li/>').text('Message: ' + msg.message + ' - ' + msg.datetime).html());
     });
-    $('form#broadcast').submit(function(event) {
-        socket.emit('add_prayer', {data: $('#broadcast_data').val()});
+    $('form#prayer').submit(function(event) {
+        socket.emit('add_prayer', {data: $('#prayer_data').val()});
         return false;
     });
 });
