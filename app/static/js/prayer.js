@@ -10,7 +10,10 @@ $(document).ready(function() {
         socket.emit('my_event', {data: true});
     });
     socket.on('my_response', function(msg) {
-        $('#log').prepend($('<li/>').text('Message: ' + msg.message + ' - ' + msg.datetime).html());
+        var item = document.createElement('li');
+        var text = document.createTextNode('Message: ' + msg.message + ' - ' + msg.datetime);
+        item.appendChild(text);
+        $('#log').prepend(item);
     });
     $('form#prayer').submit(function(event) {
         socket.emit('add_prayer', {data: $('#prayer_data').val()});
