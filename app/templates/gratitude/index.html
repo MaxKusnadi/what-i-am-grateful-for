@@ -8,14 +8,18 @@
 {% endblock %}
 
 {% block content %}
-  YOUR GRATITUDE:
-  <form id="broadcast" method="POST" action='#'>
-    <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
-    <input type="submit" value="Broadcast">
+  <h1 class='text-center' id="title">What I am grateful today...</h1>
+  <form class='col-sm-12 text-center' id="gratitude" method="POST" action='#'>
+    <div class="col-sm-12">
+      <textarea form="gratitude" name="gratitude_data" id="gratitude_data" placeholder="My gratitude..."></textarea>
+    </div>
+    <div class="col-sm-12">
+      <input class='btn btn-success' type="submit" value="Share My Gratitude">
+    </div>
   </form>
 
   {% if results|length > 0 %}
-    <ul id="log">
+    <ul id="log" class="col-sm-12 text-center">
       {% for result in results %}
         <li>Message: {{ result['message'] }} - {{ result['datetime'] }}</li>
       {% endfor %}
