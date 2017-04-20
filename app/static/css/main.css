@@ -1,8 +1,14 @@
 body{
-  background: #fafafa;
+  background: white;
   padding-top: 70px;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
+  color: #2F496E;
+}
+
+h1 {
+  font-size:40px;
+  font-weight: bold;
 }
 
 form{
@@ -15,14 +21,39 @@ ul{
 }
 
 .btn{
-  font-size: 16px;
+  font-size: 18px;
+  background-color: #ed8c72;
+}
+
+.navbar-default {
+  background-color: #2988BC;
+  color: white;
+}
+
+.navbar-default .navbar-brand{
+  color:white;
+  padding-right:10px;
+}
+
+.navbar-default .navbar-brand:hover{
+  color: #ed8c72;
+}
+
+.navbar-default .navbar-nav>li>a{
+  color:white;
+  background-color: #73b3d6;
+}
+
+.navbar-default .navbar-nav>li>a:hover{
+  color: #ed8c72;
+  background-color: inherit;
 }
 
 textarea{
   resize: None;
   width: 600px;
   height: 280px;
-  font-size: 18px;
+  font-size: 20px;
   border-radius: 20px;
   border: 1px solid #000;
   text-align: center;
@@ -36,18 +67,23 @@ textarea{
   box-shadow: none;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 768px) {
   body{
-    padding-top: 160px;
+    padding-top: 60px;
   }
 
   h1{
-    font-size: 24px;
+    font-size: 36px;
   }
 
   textarea{
-    width: 80%;
+    width: 95%;
     height: 280px;
+    font-size: 24px;
+  }
+
+  .btn{
+    font-size: 24px;
   }
 
   .navbar-header {
@@ -72,10 +108,12 @@ textarea{
   }
   .navbar-nav {
       float: none!important;
-      margin-top: 7.5px;
+      margin-top: 0;
+      margin-bottom: 0;
   }
   .navbar-nav>li {
-      float: none;
+    float: left;
+    height: 49px;
   }
   .navbar-nav>li>a {
       padding-top: 10px;
@@ -83,5 +121,9 @@ textarea{
   }
   .collapse.in{
       display:block !important;
+  }
+  .navbar-default .navbar-nav>li>a{
+    color:inherit;
+    background-color: inherit;
   }
 }
