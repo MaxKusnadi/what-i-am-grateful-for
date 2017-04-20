@@ -12,7 +12,6 @@ class PrayerView(MethodView):
 
     def get(self):
         title = "I NEED TO PRAY"
-        # data = url_for('static', filename='js/prayer.js')
         unprayed_prayers = self.controller.get_unprayed_prayers()
         prayed_prayers = self.controller.get_prayed_prayers()
         return render_template('prayer/index.html', title=title,

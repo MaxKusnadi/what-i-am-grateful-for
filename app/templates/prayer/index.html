@@ -20,10 +20,13 @@
   </form>
 
   {% if results|length > 0 %}
-    <ul id="log" class="col-sm-12 text-center">
+    <div id="log" class="col-sm-4 col-sm-offset-4 text-center">
       {% for result in results %}
-        <li class="message">Message: {{ result['message'] }} - {{ result['datetime'] }}</li>
+          <div class="message">
+            <p class="content">"{{ result['message'] }}"</p>
+            <p class="date">{{ result['datetime'] }}</p>
+          </div>
       {% endfor %}
-    </ul>
+    </div>
   {% endif %}
 {% endblock %}

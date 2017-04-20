@@ -1,5 +1,6 @@
 import logging
 import pytz
+import dateutil.parser
 
 from datetime import datetime, timedelta
 from flask_socketio import Namespace, emit
@@ -20,13 +21,14 @@ class PrayerController(Namespace):
             logging.error("Empty prayer message")
             return None
         logging.info("Adding a prayer from controller...")
-        time = self._get_current_time().isoformat()
-        prayer = self.controller.add_prayer(message, time)
+        time = self._get_current_time()
+        time_iso = time.isoformat()
+        prayer = self.controller.add_prayer(message, time_iso)
 
         try:
             emit('my_response', {
                  'message': prayer.message,
-                 'datetime': time,
+                 'datetime': time.strftime("%d/%m/%Y - %H:%M"),
                  'isPrayed': prayer.isPrayed
             }, broadcast=True)
         except RuntimeError:
@@ -55,6 +57,8 @@ class PrayerController(Namespace):
         all_prayers = self.controller.get_prayed_prayers(
             start_date=start_time, end_date=now)
 
+        all_prayers = list(map(lambda x: self._format_date(x), all_prayers))
+
         return all_prayers
 
     def get_unprayed_prayers(self):
@@ -68,7 +72,13 @@ class PrayerController(Namespace):
         all_prayers = self.controller.get_unprayed_prayers(
             start_date=start_time, end_date=now)
 
+        all_prayers = list(map(lambda x: self._format_date(x), all_prayers))
+
         return all_prayers
+
+    def _format_date(self, data):
+        data.datetime = dateutil.parser.parse(data.datetime).strftime("%d/%m/%Y - %H:%M")
+        return data
 
     def _get_current_time(self): # pragma: no cover
         timezone = pytz.timezone('Asia/Singapore')

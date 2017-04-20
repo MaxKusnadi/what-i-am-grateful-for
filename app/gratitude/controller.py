@@ -1,5 +1,6 @@
 import logging
 import pytz
+import dateutil.parser
 
 from datetime import datetime, timedelta
 from flask_socketio import Namespace, emit
@@ -20,13 +21,14 @@ class GratitudeController(Namespace):
             logging.error("Empty gratitude message")
             return None
         logging.info("Adding a gratitude from controller...")
-        time = self._get_current_time().isoformat()
-        gratitude = self.controller.add_gratitude(message, time)
+        time = self._get_current_time()
+        time_iso = time.isoformat()
+        gratitude = self.controller.add_gratitude(message, time_iso)
 
         try:
             emit('my_response', {
                  'message': gratitude.message,
-                 'datetime': time
+                 'datetime': time.strftime("%d/%m/%Y - %H:%M")
             }, broadcast=True)
         except RuntimeError:
             pass  # for testing purposes
@@ -49,7 +51,13 @@ class GratitudeController(Namespace):
         all_gratitudes = self.controller.get_gratitudes(
             start_date=start_time, end_date=now)
 
+        all_gratitudes = list(map(lambda x: self._format_date(x), all_gratitudes))
+
         return all_gratitudes
+
+    def _format_date(self, data):
+        data.datetime = dateutil.parser.parse(data.datetime).strftime("%d/%m/%Y - %H:%M")
+        return data
 
     def _get_current_time(self): # pragma: no cover
         timezone = pytz.timezone('Asia/Singapore')
