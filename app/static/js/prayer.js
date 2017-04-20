@@ -11,17 +11,17 @@ $(document).ready(function() {
     });
     socket.on('my_response', function(msg) {
         var item = document.createElement('div');
-        item.className = "message"
-        var content = document.createElement('p')
-        content.className = "content"
-        var date = document.createElement('p')
-        date.className = "date"
+        item.className = "message";
+        var content = document.createElement('p');
+        content.className = "content";
+        var date = document.createElement('p');
+        date.className = "date";
         var content_text = document.createTextNode('"' + msg.message + '"');
-        content.appendChild(content_text)
+        content.appendChild(content_text);
         var date_text = document.createTextNode(msg.datetime);
-        date.appendChild(date_text)
+        date.appendChild(date_text);
         item.appendChild(content);
-        item.appendChild(date)
+        item.appendChild(date);
         $('#log').prepend(item);
     });
     $('form#prayer').submit(function(event) {
