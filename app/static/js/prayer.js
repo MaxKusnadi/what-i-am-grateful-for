@@ -1,7 +1,11 @@
 /**
  * Created by max on 19/4/17.
  */
-
+$(document).ready(function(){
+	$("#title, #prayer, #log").hide().each(function(i){
+		$(this).delay(i*400).fadeIn(400);
+	});
+});
 $(document).ready(function() {
 
     namespace = '/prayer';
@@ -22,7 +26,7 @@ $(document).ready(function() {
         date.appendChild(date_text);
         item.appendChild(content);
         item.appendChild(date);
-        $('#log').prepend(item);
+        $(item).hide().prependTo('#log').fadeIn('slow');
     });
     $('form#prayer').submit(function(event) {
         socket.emit('add_prayer', {data: $('#prayer_data').val()});

@@ -1,8 +1,13 @@
 /**
  * Created by max on 18/4/17.
  */
-
+$(document).ready(function(){
+	$("#title, #gratitude, #log").hide().each(function(i){
+		$(this).delay(i*500).fadeIn('slow');
+	});
+});
 $(document).ready(function() {
+
 
     namespace = '/gratitude';
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
@@ -22,7 +27,8 @@ $(document).ready(function() {
         date.appendChild(date_text);
         item.appendChild(content);
         item.appendChild(date);
-        $('#log').prepend(item);
+        $(item).hide().prependTo('#log').fadeIn('slow');
+
     });
     $('form#gratitude').submit(function(event) {
         socket.emit('add_gratitude', {data: $('#gratitude_data').val()});
