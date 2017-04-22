@@ -11,10 +11,9 @@ class PrayerView(MethodView):
         self.controller = PrayerController()
 
     def get(self):
-        title = "I NEED TO PRAY"
         unprayed_prayers = self.controller.get_unprayed_prayers()
         prayed_prayers = self.controller.get_prayed_prayers()
-        return render_template('prayer/index.html', title=title,
+        return render_template('prayer/index.html',
                                results=unprayed_prayers,
                                prayed_prayers=prayed_prayers)
 

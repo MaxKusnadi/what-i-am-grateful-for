@@ -11,10 +11,8 @@ class GratitudeView(MethodView):
         self.controller = GratitudeController()
 
     def get(self):
-        title = "I AM GRATEFUL"
         results = self.controller.get_all_gratitudes()
-        return render_template('gratitude/index.html', results=results,
-                               title=title)
+        return render_template('gratitude/index.html', results=results)
 
 
 @app.after_request
