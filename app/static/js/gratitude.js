@@ -2,7 +2,7 @@
  * Created by max on 18/4/17.
  */
 $(document).ready(function(){
-	$("#title, #gratitude, #log").hide().each(function(i){
+	$("#title, #verse, #gratitude, #log").hide().each(function(i){
 		$(this).delay(i*500).fadeIn('slow');
 	});
 });
