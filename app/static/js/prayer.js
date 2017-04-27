@@ -27,10 +27,12 @@ $(document).ready(function() {
         item.appendChild(content);
         item.appendChild(date);
         $(item).hide().prependTo('#log').fadeIn('slow');
+        twemoji.parse(document.body)
     });
     $('form#prayer').submit(function(event) {
         socket.emit('add_prayer', {data: $('#prayer_data').val()});
         $('#prayer_data').val('');
         return false;
     });
+    twemoji.parse(document.body);
 });

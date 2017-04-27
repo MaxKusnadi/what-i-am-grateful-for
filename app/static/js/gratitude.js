@@ -28,11 +28,12 @@ $(document).ready(function() {
         item.appendChild(content);
         item.appendChild(date);
         $(item).hide().prependTo('#log').fadeIn('slow');
-
+        twemoji.parse(document.body)
     });
     $('form#gratitude').submit(function(event) {
         socket.emit('add_gratitude', {data: $('#gratitude_data').val()});
         $('#gratitude_data').val('');
         return false;
     });
+    twemoji.parse(document.body);
 });
