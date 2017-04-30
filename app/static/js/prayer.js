@@ -38,10 +38,10 @@ $(document).ready(function() {
         $('#prayer_data').val('');
         return false;
     });
-    twemoji.parse(document.body);
 
     var contents = document.getElementsByClassName("content");
     for(var i=0; i<contents.length; i++){
         contents[i].innerHTML=convert(contents[i].innerHTML);
     }
+    twemoji.parse(document.body);
 });
