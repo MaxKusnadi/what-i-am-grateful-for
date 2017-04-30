@@ -10,9 +10,11 @@ $(document).ready(function() {
 
     namespace = '/prayer';
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+
     socket.on('connect', function() {
         socket.emit('my_event', {data: true});
     });
+
     socket.on('my_response', function(msg) {
         var item = document.createElement('div');
         item.className = "message";
@@ -20,8 +22,10 @@ $(document).ready(function() {
         content.className = "content";
         var date = document.createElement('p');
         date.className = "date";
-        var content_text = document.createTextNode('"' + msg.message + '"');
+        var message = msg.message;
+        var content_text = document.createTextNode('"' + message + '"');
         content.appendChild(content_text);
+        content.innerHTML = convert(content.innerHTML);
         var date_text = document.createTextNode(msg.datetime);
         date.appendChild(date_text);
         item.appendChild(content);
@@ -35,4 +39,9 @@ $(document).ready(function() {
         return false;
     });
     twemoji.parse(document.body);
+
+    var contents = document.getElementsByClassName("content");
+    for(var i=0; i<contents.length; i++){
+        contents[i].innerHTML=convert(contents[i].innerHTML);
+    }
 });
