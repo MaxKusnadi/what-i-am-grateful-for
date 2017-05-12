@@ -43,7 +43,7 @@ class GratitudeController(Namespace):
     def get_all_gratitudes(self):
         logging.info("Getting all gratitudes from controller")
         now = self._get_current_time()
-        start_time = now - timedelta(days=7)
+        start_time = now - timedelta(days=30)
 
         now = now.isoformat()
         start_time = start_time.isoformat()
