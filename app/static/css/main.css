@@ -112,6 +112,7 @@ img.emoji {
 }
 
 textarea{
+  color: black;
   resize: None;
   width: 650px;
   height: 280px;
