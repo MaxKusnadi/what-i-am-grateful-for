@@ -1,9 +1,13 @@
 body{
-  background: white;
+  background: black no-repeat;
+  background-size: 50%;
+  background-image: url("https://images.alphacoders.com/550/550281.jpg");
+  background-position: right bottom;
+  background-attachment: fixed;
   padding-top: 70px;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 18px;
-  color: #2F496E;
+  font-size: 16px;
+  color: #FFFDFF;
 }
 
 #verse{
@@ -14,7 +18,7 @@ body{
 }
 
 h1 {
-  font-size:46px;
+  font-size:40px;
   font-weight: bold;
 }
 
@@ -38,7 +42,13 @@ img.emoji {
   padding-top: 50px;
   padding-bottom: 50px;
   word-wrap: break-word;
-  border-bottom: 1px solid #2988BC;
+}
+
+.border{
+  width: 10%;
+  border-bottom: 1px solid #FFFAD2;
+  height: 1px;
+  margin: 0 auto;
 }
 
 .message .content{
@@ -52,11 +62,19 @@ img.emoji {
 
 .btn{
   font-size: 18px;
-  background-color: #ed8c72;
+  background-color: #532D1A;
+  border-color: black;
+}
+
+.btn-success:hover{
+  background-color: #EEC9A9;
+  border-color:black;
+  color:black;
 }
 
 .navbar-default {
-  background-color: #2988BC;
+  background-color: #1E0B02;
+  border-color: black;
   color: white;
 }
 
@@ -66,17 +84,21 @@ img.emoji {
 }
 
 .navbar-default .navbar-brand:hover{
-  color: #ed8c72;
+  color: black;
 }
 
 .navbar-default .navbar-nav>li>a{
   color:white;
-  background-color: #73b3d6;
+  background-color: inherit;
 }
 
 .navbar-default .navbar-nav>li>a:hover{
-  color: #ed8c72;
-  background-color: inherit;
+  color: black;
+  background-color: #532D1A;
+}
+
+.navbar-default .navbar-nav>.active>a{
+  background-color: #EEC9A9;
 }
 
 textarea{
