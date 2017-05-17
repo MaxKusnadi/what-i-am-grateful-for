@@ -6,7 +6,7 @@ html {
 }
 body{
   background: black no-repeat;
-  background-size: 50%;
+  background-size: 80%;
   background-image: url("https://images.alphacoders.com/550/550281.jpg");
   background-position: right bottom;
   overflow-y: scroll;
