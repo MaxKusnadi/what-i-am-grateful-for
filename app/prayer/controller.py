@@ -64,7 +64,7 @@ class PrayerController(Namespace):
     def get_unprayed_prayers(self):
         logging.info("Getting all unprayed prayers from controller")
         now = self._get_current_time()
-        start_time = now - timedelta(days=7)
+        start_time = now - timedelta(days=365)
 
         now = now.isoformat()
         start_time = start_time.isoformat()
