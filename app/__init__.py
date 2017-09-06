@@ -3,6 +3,7 @@ import logging
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
+from flask_sslify import SSLify
 
 logging.basicConfig(level=logging.INFO,
                     format=' %(asctime)s - %(levelname)s - %(message)s')
@@ -11,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
-
+sslify = SSLify(app, permanent=True, subdomains=True)
 
 # Models
 from app.gratitude.models import *
