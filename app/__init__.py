@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
-sslify = SSLify(app, permanent=True, subdomains=True)
+sslify = SSLify(app)
 
 # Models
 from app.gratitude.models import *
