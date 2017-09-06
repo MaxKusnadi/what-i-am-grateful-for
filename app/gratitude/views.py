@@ -15,6 +15,14 @@ class GratitudeView(MethodView):
         return render_template('gratitude/index.html', results=results)
 
 
+class SSLView(MethodView):
+
+    def get(self, token_value):
+        with open('.well-known/acme-challenge/{}'.format(token_value)) as f:
+            answer = f.readline().strip()
+        return answer
+
+
 @app.after_request
 def add_header(r):
     """
@@ -29,3 +37,5 @@ def add_header(r):
 
 
 app.add_url_rule('/', view_func=GratitudeView.as_view('gratitude'))
+app.add_url_rule('/.well-known/acme-challenge/<token_value>', view_func=SSLView.as_view('ssl'))
+
