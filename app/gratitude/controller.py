@@ -68,4 +68,5 @@ class GratitudeController(Namespace):
         if message['data']:
             logging.info("A client is connected to the gratitude page")
 
+
 socketio.on_namespace(GratitudeController('/gratitude'))

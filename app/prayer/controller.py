@@ -89,4 +89,5 @@ class PrayerController(Namespace):
         if message['data']:
             logging.info("A client is connected to the prayer page")
 
+
 socketio.on_namespace(PrayerController('/prayer'))
