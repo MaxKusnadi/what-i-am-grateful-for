@@ -26,7 +26,7 @@ class PrayerAPIView(MethodView):
         self.controller = PrayerController()
 
     def get(self):
-        unprayed_prayers = self.controller.get_unprayed_prayers()
+        unprayed_prayers = self.controller.get_unprayed_prayers_api()
         return json.dumps(unprayed_prayers)
 
 

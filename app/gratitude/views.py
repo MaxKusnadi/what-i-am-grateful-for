@@ -23,7 +23,7 @@ class GratitudeApiView(MethodView):
         self.controller = GratitudeController()
 
     def get(self):
-        results = self.controller.get_all_gratitudes()
+        results = self.controller.get_all_gratitudes_api()
         return json.dumps(results)
 
 

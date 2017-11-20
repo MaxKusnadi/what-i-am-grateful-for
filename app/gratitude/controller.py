@@ -55,6 +55,11 @@ class GratitudeController(Namespace):
 
         return all_gratitudes
 
+    def get_all_gratitudes_api(self):
+        gratitudes = self.get_all_gratitudes()
+        result = list(map(lambda x: {"message": x.message, "datetime": x.datetime}, gratitudes))
+        return result
+
     def _format_date(self, data):
         data.datetime = dateutil.parser.parse(data.datetime).strftime("%d/%m/%Y - %H:%M")
         return data
