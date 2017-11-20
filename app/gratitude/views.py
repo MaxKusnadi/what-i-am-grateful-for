@@ -1,5 +1,7 @@
+import json
+
 from flask.views import MethodView
-from flask import render_template, url_for
+from flask import render_template
 
 from app import app
 from app.gratitude.controller import GratitudeController
@@ -13,6 +15,16 @@ class GratitudeView(MethodView):
     def get(self):
         results = self.controller.get_all_gratitudes()
         return render_template('gratitude/index.html', results=results)
+
+
+class GratitudeApiView(MethodView):
+
+    def __init__(self):  # pragma: no cover
+        self.controller = GratitudeController()
+
+    def get(self):
+        results = self.controller.get_all_gratitudes()
+        return json.dumps(results)
 
 
 class SSLView(MethodView):
@@ -37,5 +49,6 @@ def add_header(r):
 
 
 app.add_url_rule('/', view_func=GratitudeView.as_view('gratitude'))
+app.add_url_rule('/api/gratitude', view_func=GratitudeApiView.as_view('gratitude_api'))
 app.add_url_rule('/.well-known/acme-challenge/<token_value>', view_func=SSLView.as_view('ssl'))
 

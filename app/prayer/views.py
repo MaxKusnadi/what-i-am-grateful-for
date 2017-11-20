@@ -1,5 +1,7 @@
+import json
+
 from flask.views import MethodView
-from flask import render_template, url_for
+from flask import render_template
 
 from app import app
 from app.prayer.controller import PrayerController
@@ -18,6 +20,17 @@ class PrayerView(MethodView):
                                prayed_prayers=prayed_prayers)
 
 
+class PrayerAPIView(MethodView):
+
+    def __init__(self):  # pragma: no cover
+        self.controller = PrayerController()
+
+    def get(self):
+        unprayed_prayers = self.controller.get_unprayed_prayers()
+        return json.dumps(unprayed_prayers)
+
+
+
 @app.after_request
 def add_header(r):
     """
@@ -32,3 +45,4 @@ def add_header(r):
 
 
 app.add_url_rule('/prayer', view_func=PrayerView.as_view('prayer'))
+app.add_url_rule('/api/prayer', view_func=PrayerAPIView.as_view('prayer_api'))
