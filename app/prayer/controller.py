@@ -76,10 +76,9 @@ class PrayerController(Namespace):
 
         return all_prayers
 
-    def get_unprayed_prayers_api(self):
+    def get_unprayed_prayers(self):
         prayers = self.get_unprayed_prayers()
-        result = list(map(lambda x: {"message": x.message, "datetime": x.datetime}, prayers))
-        return result
+
 
     def _format_date(self, data):
         data.datetime = dateutil.parser.parse(data.datetime).strftime("%d/%m/%Y - %H:%M")
